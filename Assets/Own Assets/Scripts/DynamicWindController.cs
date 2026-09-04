@@ -3,97 +3,56 @@ using UnityEngine;
 
 public class DynamicWindController : MonoBehaviour
 {
-    [Header("Wind Settings")]
-    [Range(0f, 3f)]
+    [Header("WIND SETTINGS")]
+
+    [Range(0f, 10f)]
+    [SerializeField] private float windMovement = 10f;
+
+    [Range(0f, 5f)]
+    [SerializeField] private float windDensity = 0.01f;
+
+    [Range(0f, 1f)]
     [SerializeField] private float windStrength = 1f;
 
-    [Header("Tree Renderers")]
-    [SerializeField] private Renderer[] treeRenderers;
 
-    private readonly List<Material> windMaterials = new List<Material>();
+    [Header("VEGETATION MATERIALS")]
+
+    [SerializeField]
+    private List<Material> windMaterials = new List<Material>();
+
+
+    // Shader property IDs
+    private static readonly int WindMovementID = Shader.PropertyToID("_WindMovement");
+    private static readonly int WindDensityID = Shader.PropertyToID("_WindDensity");
+    private static readonly int WindStrengthID = Shader.PropertyToID("_WindStrength");
+
 
     private void Start()
     {
-        FindWindMaterials();
-        ApplyWindStrength();
+        ApplyWind();
     }
+
 
     private void Update()
     {
-        ApplyWindStrength();
+        ApplyWind();
     }
 
-    private void FindWindMaterials()
-    {
-        windMaterials.Clear();
 
-        foreach (Renderer renderer in treeRenderers)
-        {
-            if (renderer == null)
-                continue;
-
-            Material[] materials = renderer.materials;
-
-            foreach (Material material in materials)
-            {
-                if (material == null)
-                    continue;
-
-                if (HasWindStrengthProperty(material))
-                {
-                    if (!windMaterials.Contains(material))
-                    {
-                        windMaterials.Add(material);
-                    }
-                }
-            }
-        }
-
-        Debug.Log("Wind materials found: " + windMaterials.Count);
-    }
-
-    private bool HasWindStrengthProperty(Material material)
-    {
-        Shader shader = material.shader;
-
-        for (int i = 0; i < shader.GetPropertyCount(); i++)
-        {
-            string propertyName = shader.GetPropertyName(i);
-            string propertyDescription = shader.GetPropertyDescription(i);
-
-            string combinedText =
-                (propertyName + " " + propertyDescription).ToLower();
-
-            if (combinedText.Contains("wind") &&
-                combinedText.Contains("strength"))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private void ApplyWindStrength()
+    private void ApplyWind()
     {
         foreach (Material material in windMaterials)
         {
-            Shader shader = material.shader;
+            if (material == null)
+                continue;
 
-            for (int i = 0; i < shader.GetPropertyCount(); i++)
-            {
-                string propertyName = shader.GetPropertyName(i);
-                string propertyDescription = shader.GetPropertyDescription(i);
+            // Make sure the custom wind shader feature is enabled
+            material.EnableKeyword("_CUSTOMWIND_ON");
 
-                string combinedText =
-                    (propertyName + " " + propertyDescription).ToLower();
-
-                if (combinedText.Contains("wind") &&
-                    combinedText.Contains("strength"))
-                {
-                    material.SetFloat(propertyName, windStrength);
-                }
-            }
+            // Send values to the shader
+            material.SetFloat(WindMovementID, windMovement);
+            material.SetFloat(WindDensityID, windDensity);
+            material.SetFloat(WindStrengthID, windStrength);
         }
     }
 }
