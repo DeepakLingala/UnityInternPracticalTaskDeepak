@@ -16,6 +16,7 @@ Shader "Polytope Studio/PT_Vegetation_Foliage_Shader"
 		[Toggle(_TRANSLUCENCYONOFF_ON)] _TRANSLUCENCYONOFF("TRANSLUCENCY ON/OFF", Float) = 1
 		[Toggle(_CUSTOMWIND_ON)] _CUSTOMWIND("CUSTOM WIND", Float) = 1
 		[Toggle(_WINDMASKONOFF_ON)] _WINDMASKONOFF("WIND MASK ON/OFF", Float) = 0
+		_WindDirection("Wind Direction", Range(0, 360)) = 0
 		_WindMovement("Wind Movement", Range( 0 , 10)) = 0.5
 		_WindDensity("Wind Density", Range( 0 , 5)) = 3.3
 		_WindStrength("Wind Strength", Range( 0 , 1)) = 0.3
@@ -328,6 +329,7 @@ Shader "Polytope Studio/PT_Vegetation_Foliage_Shader"
 			float _WindMovement;
 			float _WindDensity;
 			float _WindStrength;
+			float _WindDirection;
 			float _CUSTOMCOLORSTINTING;
 			float _Gradient;
 			float _SnowAmount;

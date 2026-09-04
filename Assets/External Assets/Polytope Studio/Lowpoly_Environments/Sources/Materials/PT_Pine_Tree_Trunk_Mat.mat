@@ -122,11 +122,12 @@ Material:
     - _UVSec: 0
     - _WINDMASKONOFF: 0
     - _WINDTRUNKMASKONOFF: 1
-    - _WindDensity: 0.01
+    - _WindDensity: 0.18571472
     - _WindDensity1: 0.2
-    - _WindMovement: 10
+    - _WindDirection: 0
+    - _WindMovement: 1.0857139
     - _WindMovement1: 0.5
-    - _WindStrength: 1
+    - _WindStrength: 1.0999995
     - _WindStrength1: 0.3
     - _ZWrite: 1
     - __dirty: 0

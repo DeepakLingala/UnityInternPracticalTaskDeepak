@@ -16,6 +16,7 @@ Shader "Polytope Studio/PT_Vegetation_Flowers_Shader"
 		[HDR]_FLOWERSCOLOR("FLOWERS COLOR", Color) = (1,0,0,0)
 		[Toggle(_TRANSLUCENCYONOFF_ON)] _TRANSLUCENCYONOFF("TRANSLUCENCY ON/OFF", Float) = 1
 		[Toggle(_CUSTOMWIND_ON)] _CUSTOMWIND("CUSTOM WIND", Float) = 1
+		_WindDirection("Wind Direction", Range(0, 360)) = 0
 		_WindMovement("Wind Movement", Range( 0 , 1)) = 0.5
 		_WindDensity("Wind Density", Range( 0 , 5)) = 0.2
 		_WindStrength("Wind Strength", Range( 0 , 1)) = 0.3
@@ -321,6 +322,7 @@ Shader "Polytope Studio/PT_Vegetation_Flowers_Shader"
 			float _WindMovement;
 			float _WindDensity;
 			float _WindStrength;
+			float _WindDirection;
 			float _CUSTOMCOLORSTINTING;
 			float _CUSTOMFLOWERSCOLOR;
 			float _Gradient;

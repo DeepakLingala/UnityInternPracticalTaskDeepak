@@ -21,23 +21,88 @@ public class DynamicWindController : MonoBehaviour
     private List<Material> windMaterials = new List<Material>();
 
 
-    // Shader property IDs
-    private static readonly int WindMovementID = Shader.PropertyToID("_WindMovement");
-    private static readonly int WindDensityID = Shader.PropertyToID("_WindDensity");
-    private static readonly int WindStrengthID = Shader.PropertyToID("_WindStrength");
+    [Header("SMOOTHING")]
+
+    [SerializeField]
+    private float smoothSpeed = 5f;
+
+
+    private float targetWindMovement;
+    private float targetWindDensity;
+    private float targetWindStrength;
+
+
+    private static readonly int WindMovementID =
+        Shader.PropertyToID("_WindMovement");
+
+    private static readonly int WindDensityID =
+        Shader.PropertyToID("_WindDensity");
+
+    private static readonly int WindStrengthID =
+        Shader.PropertyToID("_WindStrength");
 
 
     private void Start()
     {
+        targetWindMovement = windMovement;
+        targetWindDensity = windDensity;
+        targetWindStrength = windStrength;
+
         ApplyWind();
     }
 
 
     private void Update()
     {
+        windMovement = Mathf.Lerp(
+            windMovement,
+            targetWindMovement,
+            smoothSpeed * Time.deltaTime
+        );
+
+        windDensity = Mathf.Lerp(
+            windDensity,
+            targetWindDensity,
+            smoothSpeed * Time.deltaTime
+        );
+
+        windStrength = Mathf.Lerp(
+            windStrength,
+            targetWindStrength,
+            smoothSpeed * Time.deltaTime
+        );
+
         ApplyWind();
     }
 
+
+    // =========================================
+    // UI CONTROL
+    // =========================================
+
+    public void SetWindMovement(float value)
+    {
+        targetWindMovement = value;
+
+        Debug.Log("Target Wind Movement: " + targetWindMovement);
+    }
+
+
+    public void SetWindDensity(float value)
+    {
+        targetWindDensity = value;
+    }
+
+
+    public void SetWindStrength(float value)
+    {
+        targetWindStrength = value;
+    }
+
+
+    // =========================================
+    // APPLY WIND
+    // =========================================
 
     private void ApplyWind()
     {
@@ -46,13 +111,22 @@ public class DynamicWindController : MonoBehaviour
             if (material == null)
                 continue;
 
-            // Make sure the custom wind shader feature is enabled
             material.EnableKeyword("_CUSTOMWIND_ON");
 
-            // Send values to the shader
-            material.SetFloat(WindMovementID, windMovement);
-            material.SetFloat(WindDensityID, windDensity);
-            material.SetFloat(WindStrengthID, windStrength);
+            material.SetFloat(
+                WindMovementID,
+                windMovement
+            );
+
+            material.SetFloat(
+                WindDensityID,
+                windDensity
+            );
+
+            material.SetFloat(
+                WindStrengthID,
+                windStrength
+            );
         }
     }
 }
