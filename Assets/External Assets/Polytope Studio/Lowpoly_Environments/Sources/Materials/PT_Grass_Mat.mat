@@ -32,9 +32,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _WindDensity: 0.18571472
-    - _WindMovement: 1.0857139
-    - _WindStrength: 1.0999995
+    - _WindDensity: 0.028571647
+    - _WindMovement: 2
+    - _WindStrength: 1.4714279
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
