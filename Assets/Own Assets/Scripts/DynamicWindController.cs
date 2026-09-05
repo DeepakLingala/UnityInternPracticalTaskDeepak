@@ -51,7 +51,6 @@ public class DynamicWindController : MonoBehaviour
         ApplyWind();
     }
 
-
     private void Update()
     {
         windMovement = Mathf.Lerp(
@@ -76,33 +75,34 @@ public class DynamicWindController : MonoBehaviour
     }
 
 
-    // =========================================
-    // UI CONTROL
-    // =========================================
-
     public void SetWindMovement(float value)
     {
         targetWindMovement = value;
 
-        Debug.Log("Target Wind Movement: " + targetWindMovement);
+        Debug.Log("Wind Movement: " + value);
     }
 
 
     public void SetWindDensity(float value)
     {
         targetWindDensity = value;
-    }
 
+        Debug.Log("Wind Density: " + value);
+    }
 
     public void SetWindStrength(float value)
     {
         targetWindStrength = value;
+
+        Debug.Log("Wind Strength: " + value);
     }
 
 
-    // =========================================
-    // APPLY WIND
-    // =========================================
+    public float GetWindStrength()
+    {
+        return windStrength;
+    }
+
 
     private void ApplyWind()
     {

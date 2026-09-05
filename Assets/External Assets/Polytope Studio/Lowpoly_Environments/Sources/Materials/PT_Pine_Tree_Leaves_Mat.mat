@@ -129,12 +129,12 @@ Material:
     - _Translucency: 7.8
     - _UVSec: 0
     - _WINDMASKONOFF: 0
-    - _WindDensity: 0.028571647
+    - _WindDensity: 0.0499997
     - _WindDensity1: 0.01
     - _WindDirection: 0
-    - _WindMovement: 2
+    - _WindMovement: 10
     - _WindMovement1: 10
-    - _WindStrength: 1.4714279
+    - _WindStrength: 1.8142854
     - _WindStrength1: 1
     - _ZWrite: 0
     - __dirty: 0

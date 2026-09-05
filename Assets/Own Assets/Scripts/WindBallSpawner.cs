@@ -5,29 +5,26 @@ public class WindBallSpawner : MonoBehaviour
     [SerializeField] private GameObject windBallPrefab;
     [SerializeField] private float spawnInterval = 1f;
 
-    [Header("Random Spawn Area")]
-    [SerializeField] private float spawnAreaX = 10f;
-    [SerializeField] private float spawnAreaZ = 10f;
+    private BoxCollider spawnArea;
 
     private void Start()
     {
+        spawnArea = GetComponent<BoxCollider>();
+
         InvokeRepeating(nameof(SpawnBall), 0f, spawnInterval);
     }
 
     private void SpawnBall()
     {
-        float randomX = Random.Range(-spawnAreaX, spawnAreaX);
-        float randomZ = Random.Range(-spawnAreaZ, spawnAreaZ);
-
-        Vector3 spawnPosition = transform.position + new Vector3(
-            randomX,
-            0f,
-            randomZ
+        Vector3 randomPosition = new Vector3(
+            Random.Range(spawnArea.bounds.min.x, spawnArea.bounds.max.x),
+            Random.Range(spawnArea.bounds.min.y, spawnArea.bounds.max.y),
+            Random.Range(spawnArea.bounds.min.z, spawnArea.bounds.max.z)
         );
 
         Instantiate(
             windBallPrefab,
-            spawnPosition,
+            randomPosition,
             Quaternion.identity
         );
     }

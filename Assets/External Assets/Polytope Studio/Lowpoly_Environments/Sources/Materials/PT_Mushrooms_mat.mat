@@ -113,10 +113,10 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _WINDMASKONOFF: 0
-    - _WindDensity: 0.028571647
+    - _WindDensity: 0.0499997
     - _WindDirection: 0
-    - _WindMovement: 2
-    - _WindStrength: 1.4714279
+    - _WindMovement: 10
+    - _WindStrength: 1.8142854
     - _ZWrite: 0
     - __dirty: 0
     m_Colors:
